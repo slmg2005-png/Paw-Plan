@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#695441">
+  <meta name="description" content="PawLog creates personalised daily activities and encouragement for high-energy dogs and their owners.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="PawLog">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <title>PawLog</title>
+</head>
+<body>
+  <div class="app-shell">
+    <div class="phone">
+      <header id="appHeader" class="app-header hidden">
+        <div class="header-left">
+          <button id="backButton" class="icon-button hidden" type="button" aria-label="Go back">←</button>
+          <button id="profileShortcut" class="avatar-button" type="button" aria-label="Open profile"><span id="profileInitials">PL</span></button>
+        </div>
+        <div class="header-copy">
+          <span class="eyebrow">PawLog</span>
+          <strong id="headerTitle">Today</strong>
+        </div>
+        <button id="shareButton" class="small-button" type="button">Share</button>
+      </header>
+
+      <div id="appScroll" class="app-scroll">
+        <main>
+          <section id="screenWelcome" class="screen active-screen">
+            <div class="hero-icon">🐕</div>
+            <span class="chip">Welcome to PawLog</span>
+            <h1 id="loginHeading">Create your login</h1>
+            <p id="loginIntro" class="muted">Set up your profile once. PawLog will remember it on this device.</p>
+
+            <div id="createLoginPanel" class="panel stack">
+              <label>Your first name<input id="ownerName" type="text" autocomplete="given-name" placeholder="e.g. Sienna"></label>
+              <label>Username<input id="ownerUsername" type="text" autocomplete="username" placeholder="e.g. sienna.g"></label>
+              <label>Email<input id="ownerEmail" type="email" autocomplete="email" placeholder="name@example.com"></label>
+              <label>Phone number<input id="ownerPhone" type="tel" autocomplete="tel" placeholder="e.g. 0400 000 000"></label>
+              <label>Create a four-digit login code<input id="createLoginCode" class="code-input" type="password" inputmode="numeric" maxlength="4" autocomplete="new-password" placeholder="••••"></label>
+              <label>Confirm your code<input id="confirmLoginCode" class="code-input" type="password" inputmode="numeric" maxlength="4" autocomplete="new-password" placeholder="••••"></label>
+              <p class="fine-print">This prototype stores account details and your login code only in this browser on this device.</p>
+            </div>
+
+            <div id="returningLoginPanel" class="panel stack hidden">
+              <div><span class="eyebrow">Welcome back</span><h2>Log in to continue</h2></div>
+              <label>Enter your four-digit login code<input id="loginCode" class="code-input" type="password" inputmode="numeric" maxlength="4" autocomplete="current-password" placeholder="••••"></label>
+              <button id="loginButton" class="primary-button" type="button">Open my daily check-in</button>
+              <button id="forgotCodeButton" class="secondary-button" type="button">Forgot password?</button>
+              <button id="resetDeviceButton" class="text-button" type="button">Reset PawLog on this device</button>
+            </div>
+
+            <button id="startButton" class="primary-button" type="button">Create login and continue</button>
+            <div class="beige-panel"><strong>After your first setup</strong><p class="muted">You’ll only need your four-digit code and the quick daily check-in. Your dog’s details, issues and goals stay saved.</p></div>
+          </section>
+
+          <section id="screenDog" class="screen">
+            <div class="step-line"><span>One-time setup</span><span>1 of 3</span></div><div class="progress-track"><div class="progress-fill" style="width:33%"></div></div>
+            <h1>Tell us about your dog</h1>
+            <div class="stack">
+              <label>Dog’s name<input id="dogName" type="text" placeholder="e.g. Luna"></label>
+              <div class="two-col"><label>Age<select id="dogAge"><option>Under 1 year</option><option selected>1–3 years</option><option>4–7 years</option><option>8+ years</option></select></label><label>Weight (kg)<input id="dogWeight" type="number" min="0.5" step="0.1" placeholder="18"></label></div>
+              <div class="two-col"><label>Breed or mix<input id="dogBreed" type="text" placeholder="e.g. Border Collie mix"></label><label>Size<select id="dogSize"><option>Small</option><option selected>Medium</option><option>Large</option></select></label></div>
+              <fieldset><legend>Usual energy level</legend><div class="three-col" data-choice-group="profileEnergy"><button class="choice-button" data-value="Moderate" type="button">Moderate</button><button class="choice-button selected" data-value="High" type="button">High</button><button class="choice-button" data-value="Very high" type="button">Very high</button></div></fieldset>
+              <button id="continueIssuesButton" class="primary-button" type="button">Continue</button>
+            </div>
+          </section>
+
+          <section id="screenIssues" class="screen">
+            <div class="step-line"><span>One-time setup</span><span>2 of 3</span></div><div class="progress-track"><div class="progress-fill" style="width:66%"></div></div>
+            <h1>Which issues would you like help with?</h1><p class="muted">Select everything that applies. You won’t need to repeat this each morning.</p>
+            <div id="issuesGrid" class="selection-grid"></div>
+            <label>Anything else?<textarea id="otherIssue" rows="2" placeholder="Add another issue"></textarea></label>
+            <button id="continueGoalsButton" class="primary-button" type="button">Continue to goals</button>
+          </section>
+
+          <section id="screenGoals" class="screen">
+            <div class="step-line"><span>One-time setup</span><span>3 of 3</span></div><div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>
+            <h1>What would you like to achieve?</h1>
+            <div id="goalsGrid" class="selection-grid"></div>
+            <div class="beige-panel stack">
+              <label>Short-term goal<span class="field-help">A realistic improvement for the next two to four weeks.</span><textarea id="shortTermGoal" rows="3"></textarea></label>
+              <label>Long-term goal<span class="field-help">The larger outcome to work toward over several months.</span><textarea id="longTermGoal" rows="3"></textarea></label>
+            </div>
+            <button id="finishSetupButton" class="primary-button" type="button">Finish setup</button>
+          </section>
+
+          <section id="screenCheckin" class="screen">
+            <span class="chip">Three quick choices</span>
+            <h1>Good morning, <span class="owner-name">there</span>.</h1>
+            <p id="dailyEncouragement" class="muted"></p>
+            <div class="beige-panel"><span class="eyebrow">Less than 30 seconds</span><strong>Your dog’s issues and goals are already saved.</strong></div>
+            <fieldset><legend>How is <span class="dog-name">your dog</span>’s energy right now?</legend><div class="three-col" data-choice-group="todayEnergy"><button class="choice-button" data-value="Low" type="button">Low</button><button class="choice-button" data-value="Balanced" type="button">Balanced</button><button class="choice-button selected" data-value="Buzzing" type="button">Buzzing</button></div></fieldset>
+            <fieldset><legend>How much time do you have?</legend><div class="four-col" data-choice-group="availableTime"><button class="choice-button" data-value="10" type="button">10 min</button><button class="choice-button" data-value="20" type="button">20 min</button><button class="choice-button selected" data-value="30" type="button">30 min</button><button class="choice-button" data-value="45" type="button">45+ min</button></div></fieldset>
+            <fieldset><legend>Where can you do activities today?</legend><div class="three-col" data-choice-group="todayLocation"><button class="choice-button selected" data-value="Indoor" type="button">Indoor</button><button class="choice-button" data-value="Outdoor" type="button">Outdoor</button><button class="choice-button" data-value="Either" type="button">Either</button></div></fieldset>
+            <button id="generatePlanButton" class="primary-button" type="button">Show today’s activities</button>
+          </section>
+
+          <section id="screenToday" class="screen">
+            <div class="beige-panel"><span class="eyebrow">A note for you</span><strong id="todayOwnerMessage"></strong></div>
+            <span class="eyebrow">Today’s focus</span><h1 id="energyStatus">Calm and decompress</h1><p id="planReason" class="muted"></p>
+            <div class="metric-grid"><div class="metric"><span>Time</span><strong id="planMinutes">30</strong><small>minutes</small></div><div class="metric"><span>Done</span><strong id="completedCount">0/3</strong><small>activities</small></div><div class="metric"><span>Matched</span><strong id="matchedCount">3</strong><small>to goals</small></div></div>
+            <div id="todayActivities" class="card-list"></div>
+            <button id="openProgressEntry" class="secondary-button" type="button">Record how today went</button>
+          </section>
+
+          <section id="screenLibrary" class="screen">
+            <h1>Activity library</h1><p class="muted">Browse extra activities. Adding one keeps you on this page and adds it to Today.</p>
+            <div class="filter-grid"><select id="categoryFilter"><option value="all">All categories</option><option value="calming">Calming</option><option value="enrichment">Enrichment</option><option value="training">Training</option><option value="physical">Physical</option></select><select id="locationFilter"><option value="all">All locations</option><option>Indoor</option><option>Outdoor</option><option>Either</option></select><select id="difficultyFilter"><option value="all">All levels</option><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select></div>
+            <div id="libraryActivities" class="card-list"></div>
+          </section>
+
+          <section id="screenActivity" class="screen">
+            <span id="activityCategory" class="chip"></span><h1 id="activityTitle"></h1><p id="activityDescription" class="muted"></p>
+            <div id="activityGoalPanel" class="beige-panel"></div>
+            <div class="detail-grid"><div><span class="eyebrow">Difficulty</span><strong id="activityDifficulty"></strong></div><div><span class="eyebrow">Location</span><strong id="activityLocation"></strong></div><div><span class="eyebrow">Time</span><strong id="activityMinutes"></strong></div></div>
+            <div class="panel"><h2>What you’ll need</h2><p id="activityEquipment"></p></div>
+            <div class="panel"><h2>How to do it</h2><ol id="activitySteps" class="steps"></ol></div>
+            <div class="feedback-line"><span>Was this a good fit?</span><div><button id="detailLike" class="feedback-button" type="button" aria-label="Like activity">✓</button><button id="detailDislike" class="feedback-button" type="button" aria-label="Dislike activity">×</button></div></div>
+            <button id="detailAddButton" class="primary-button" type="button">Add to today’s plan</button>
+          </section>
+
+          <section id="screenProgress" class="screen">
+            <h1>Progress</h1><p class="muted">A simple history you can refer back to or show a trainer or behaviour professional.</p>
+            <div class="metric-menu"><button class="metric-button" data-open="screenActivityHistory" type="button"><span>Activities</span><strong id="activityHistoryCount">0</strong></button><button class="metric-button" data-open="screenPlanHistory" type="button"><span>Plans</span><strong id="planHistoryCount">0</strong></button><button class="metric-button" data-open="screenPositiveHistory" type="button"><span>Positive days</span><strong id="positiveDaysCount">0</strong></button></div>
+            <button class="profile-menu-button" data-open="screenBehaviourHistory" type="button"><span><b>Past behaviour</b><small>All saved behaviour entries</small></span><span>›</span></button>
+            <div class="beige-panel"><strong>Your goals</strong><p><span class="eyebrow">Short term</span><span id="progressShortGoal"></span></p><p><span class="eyebrow">Long term</span><span id="progressLongGoal"></span></p></div>
+            <button id="progressEntryButton" class="primary-button" type="button">Add today’s progress</button>
+          </section>
+
+          <section id="screenProgressEntry" class="screen">
+            <h1>How did today go?</h1><p class="muted">Save a short note. PawLog uses this to build your history.</p>
+            <fieldset><legend>Overall</legend><div class="three-col" data-choice-group="dayResult"><button class="choice-button selected" data-value="Great" type="button">Great</button><button class="choice-button" data-value="Mixed" type="button">Mixed</button><button class="choice-button" data-value="Struggling" type="button">Struggling</button></div></fieldset>
+            <label>Behaviour or issue<select id="progressIssue"></select></label>
+            <label>What did you notice?<textarea id="progressNote" rows="4" placeholder="e.g. Settled faster after the sniff walk"></textarea></label>
+            <button id="saveProgressButton" class="primary-button" type="button">Save progress</button>
+          </section>
+
+          <section id="screenActivityHistory" class="screen history-screen"><h1>Activity history</h1><div id="activityHistoryList" class="card-list"></div></section>
+          <section id="screenPlanHistory" class="screen history-screen"><h1>Plan history</h1><div id="planHistoryList" class="card-list"></div></section>
+          <section id="screenPositiveHistory" class="screen history-screen"><h1>Positive days</h1><div id="positiveHistoryList" class="card-list"></div></section>
+          <section id="screenBehaviourHistory" class="screen history-screen"><h1>Past behaviour</h1><div id="behaviourHistoryList" class="card-list"></div></section>
+
+          <section id="screenProfileMenu" class="screen">
+            <div class="profile-heading"><div class="large-avatar"><span id="profileLargeInitials">PL</span></div><div><span class="eyebrow">Profile</span><h1 id="profileOwnerHeading">Your profile</h1><p id="profileDogSummary" class="muted"></p></div></div>
+            <div class="menu-list"><button class="profile-menu-button" data-open="screenEditProfile" type="button"><span><b>Owner & dog details</b><small>Edit names, breed, weight, age and energy</small></span><span>›</span></button><button class="profile-menu-button" data-open="screenPreferences" type="button"><span><b>Activity preferences</b><small>Liked and disliked activities</small></span><span>›</span></button><button class="profile-menu-button" data-open="screenGoalsProfile" type="button"><span><b>Issues & goals</b><small>Update what PawLog recommends for</small></span><span>›</span></button><button class="profile-menu-button" data-open="screenSettings" type="button"><span><b>Settings</b><small>Login and account details</small></span><span>›</span></button></div>
+          </section>
+
+          <section id="screenEditProfile" class="screen"><h1>Owner & dog details</h1><div class="stack"><label>Your first name<input id="editOwnerName" type="text"></label><label>Dog’s name<input id="editDogName" type="text"></label><div class="two-col"><label>Weight (kg)<input id="editDogWeight" type="number" min="0.5" step="0.1"></label><label>Age<select id="editDogAge"><option>Under 1 year</option><option>1–3 years</option><option>4–7 years</option><option>8+ years</option></select></label></div><label>Breed or mix<input id="editDogBreed" type="text"></label><label>Energy level<select id="editDogEnergy"><option>Moderate</option><option>High</option><option>Very high</option></select></label><button id="saveProfileButton" class="primary-button" type="button">Save changes</button></div></section>
+
+          <section id="screenPreferences" class="screen"><h1>Activity preferences</h1><p class="muted">Your feedback helps PawLog promote more useful activities and reduce poor fits.</p><button class="preference-summary liked" data-open="screenLiked" type="button"><span><b>✓ Liked activities</b><small>Promote similar activities</small></span><strong id="likedCount">0</strong></button><button class="preference-summary disliked" data-open="screenDisliked" type="button"><span><b>× Disliked activities</b><small>Promote different activities</small></span><strong id="dislikedCount">0</strong></button></section>
+          <section id="screenLiked" class="screen"><h1>Liked activities</h1><div id="likedList" class="card-list"></div></section>
+          <section id="screenDisliked" class="screen"><h1>Disliked activities</h1><div id="dislikedList" class="card-list"></div></section>
+
+          <section id="screenGoalsProfile" class="screen"><h1>Issues & goals</h1><p class="muted">Changing these will change future recommendations.</p><h2>Issues</h2><div id="editIssuesGrid" class="selection-grid"></div><h2>Goals</h2><div id="editGoalsGrid" class="selection-grid"></div><label>Short-term goal<textarea id="editShortGoal" rows="3"></textarea></label><label>Long-term goal<textarea id="editLongGoal" rows="3"></textarea></label><button id="saveGoalsButton" class="primary-button" type="button">Save issues & goals</button></section>
+
+          <section id="screenSettings" class="screen"><h1>Settings</h1><div class="stack"><label>Username<input id="settingsUsername" type="text"></label><label>Email<input id="settingsEmail" type="email"></label><label>Phone number<input id="settingsPhone" type="tel"></label><button id="saveSettingsButton" class="primary-button" type="button">Save account details</button><button id="settingsForgotButton" class="secondary-button" type="button">Forgot password?</button><button id="settingsResetButton" class="text-button danger" type="button">Reset PawLog on this device</button></div></section>
+
+          <section id="screenForgotPassword" class="screen"><span class="chip">Password recovery</span><h1>Reset your login code</h1><p class="muted">For this browser-only prototype, PawLog prepares a recovery email in your email app. A production version should send this securely from a backend.</p><div class="beige-panel"><span class="eyebrow">Saved email</span><strong id="recoveryEmailDisplay">No email saved</strong><p id="recoveryStatus" class="muted"></p></div><button id="sendRecoveryButton" class="secondary-button" type="button">Email a recovery code</button><label>Recovery code<input id="recoveryCodeInput" type="text" inputmode="numeric" maxlength="6"></label><label>New four-digit code<input id="recoveryNewCode" class="code-input" type="password" inputmode="numeric" maxlength="4"></label><label>Confirm new code<input id="recoveryConfirmCode" class="code-input" type="password" inputmode="numeric" maxlength="4"></label><button id="completeRecoveryButton" class="primary-button" type="button">Save new password</button></section>
+        </main>
+      </div>
+
+      <nav id="bottomNav" class="bottom-nav hidden" aria-label="Primary navigation">
+        <button data-tab="screenToday" type="button"><span>☀</span>Today</button>
+        <button data-tab="screenLibrary" type="button"><span>▦</span>Library</button>
+        <button data-tab="screenProgress" type="button"><span>↗</span>Progress</button>
+      </nav>
+      <div id="toast" class="toast" role="status"></div>
+    </div>
+  </div>
+  <script src="app.js" defer></script>
+</body>
+</html>
