@@ -1,0 +1,10 @@
+{
+  "name": "PawLog",
+  "short_name": "PawLog",
+  "description": "Personalised daily activities and encouragement for high-energy dogs and their owners.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8f4ee",
+  "theme_color": "#695441",
+  "icons": [{"src":"favicon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
