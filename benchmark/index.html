@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#5f5144">
+  <title>PawPlan Benchmark Model</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <span class="eyebrow">PawPlan • benchmark model</span>
+        <h1>Today with Luna</h1>
+      </div>
+      <button id="householdButton" class="avatar">SG</button>
+    </header>
+
+    <main>
+      <section class="hero panel">
+        <div>
+          <span class="status-dot"></span><span class="eyebrow">Today’s plan</span>
+          <h2>Calm the busy energy first.</h2>
+          <p>Three short sessions matched to a high-energy dog who struggles to settle. Total planned time stays under 30 minutes.</p>
+        </div>
+        <div class="time-ring"><strong id="totalMinutes">28</strong><span>min total</span></div>
+      </section>
+
+      <section class="quick-check panel">
+        <div>
+          <span class="eyebrow">60-second adjustment</span>
+          <h2>What’s Luna like right now?</h2>
+        </div>
+        <div class="choice-row" id="moodChoices">
+          <button data-mood="wired" class="selected">⚡ Wired</button>
+          <button data-mood="restless">↻ Restless</button>
+          <button data-mood="okay">✓ Pretty good</button>
+        </div>
+        <div class="choice-row" id="timeChoices">
+          <button data-time="10">10 min</button>
+          <button data-time="20">20 min</button>
+          <button data-time="30" class="selected">30 min</button>
+        </div>
+      </section>
+
+      <section class="section-heading">
+        <div><span class="eyebrow">Do these in order</span><h2>Your three sessions</h2></div>
+        <span id="doneSummary" class="pill">0 of 3 done</span>
+      </section>
+      <div id="activityList" class="activity-list"></div>
+
+      <section class="panel consistency-card">
+        <div>
+          <span class="eyebrow">Household consistency</span>
+          <h2>Everyone follows the same plan.</h2>
+          <p>Keep cues, boundaries and today’s focus visible to anyone caring for Luna.</p>
+        </div>
+        <div class="household-grid">
+          <div><span>Today’s cue</span><strong>“Find it”</strong></div>
+          <div><span>Avoid</span><strong>High-arousal fetch tonight</strong></div>
+          <div><span>Next person</span><strong id="nextPerson">Alex • evening</strong></div>
+        </div>
+        <button id="copyHandoff" class="secondary">Copy handoff note</button>
+      </section>
+
+      <section class="panel review-card">
+        <span class="eyebrow">Guidance standard</span>
+        <h2>Designed to be professionally reviewable.</h2>
+        <p>This benchmark demonstrates the competitor pattern of visible expert credibility. PawPlan should only label activities “expert reviewed” once a qualified trainer or behaviour professional has actually reviewed them.</p>
+        <span class="review-status">Prototype status: professional review not yet completed</span>
+      </section>
+
+      <section class="panel feedback-panel">
+        <span class="eyebrow">After the plan</span>
+        <h2>Did today actually help?</h2>
+        <p>This is deliberately stronger than a simple like/dislike because the result can improve future recommendations.</p>
+        <div class="outcome-row" id="outcomeChoices">
+          <button data-outcome="calmer">Much calmer</button>
+          <button data-outcome="same">About the same</button>
+          <button data-outcome="more">More wound up</button>
+        </div>
+        <p id="outcomeMessage" class="result-message"></p>
+      </section>
+    </main>
+
+    <nav class="bottom-nav">
+      <button class="active">Today</button>
+      <button>Library</button>
+      <button>Progress</button>
+      <button>Profile</button>
+    </nav>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
